@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="vactrack.json" />
     <link rel="icon" href="assets/icons/icon-48x48.png"/>
+
+      <!-- register service worker-->
+    <script>
+        //with no error checking or once the app is debugged
+        //if ("serviceWorker" in navicator) {
+        //  navigator.serviceWorker.register("sw.js");
+        //}
+
+        //with robust error checking for debugging
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("sw.js").then(
+            (registration) => {
+              console.log("service worker registration successful", registration);
+
+            }, (error) => {
+              console.log("service worker registration failed", registration
+              );
+            } 
+          )
+        }  else {
+              console.error("service workers are not supported.");
+            }
+    </script>
   </head>
   <body>
     <h1>Vacation tracker</h1>
@@ -26,6 +49,10 @@
         <button type="submit">Add Vacation</button>
       </p>
     </form>
+    <section id="past-vacations"></section>
+    <div id="messages">
+      <button id="sendButton">Send a message</button>
+    </div>
 
     <script src="app.js" defer></script>
   </body>
